@@ -8,7 +8,7 @@ The rotor pushes the tower once per revolution (1P) and three times when a blade
 
 <!-- id: tour.3 -->
 ### Why doesn't it fit on the road?
-Now a 7 MW turbine at 160 m as a pure steel tower. To be stiff enough it needs a 6 m diameter at the base – but only about 4.30 m fits under motorway bridges. Transport governs and the verdict turns red.
+Now a 7 MW turbine at 160 m as a pure steel tower. To carry the loads it needs a 6 m diameter at the base – but only about 4.30 m fits under motorway bridges. Transport governs and the verdict turns red. The natural frequency cannot be assessed for this turbine's wide speed range – the card explains why.
 
 <!-- id: tour.4 -->
 ### That's why the hybrid tower

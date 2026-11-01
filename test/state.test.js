@@ -54,3 +54,13 @@ test('getPath / setPath walk dotted paths with array indices', () => {
   assert.equal(i.steel.segments[0].dBot_m, 5);
   assert.equal(getPath(i, 'nope.x'), undefined);
 });
+
+test('hash paths into array internals are rejected (no crash from segments.length)', () => {
+  const base = uniformSteel();
+  for (const p of ['steel.segments.length', 'hybrid.steel.segments.length', 'turbine.constructor', 'steel.segments.0.__proto__']) {
+    const r = applyDiff(base, { [p]: 50 });
+    assert.deepEqual(r.unknownPaths, [p], p);
+    assert.equal(r.inputs.steel.segments.length, 1);
+  }
+  assert.equal(getPath(base, 'steel.segments.length'), undefined);
+});

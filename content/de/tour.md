@@ -8,7 +8,7 @@ Der Rotor stößt den Turm einmal pro Umdrehung (1P) und dreimal, wenn ein Blatt
 
 <!-- id: tour.3 -->
 ### Warum passt er nicht auf die Straße?
-Jetzt eine 7-MW-Anlage auf 160 m als reiner Stahlturm. Damit er steif genug ist, braucht er unten 6 m Durchmesser – unter Autobahnbrücken passen aber nur etwa 4,30 m. Der Transport wird maßgebend, das Urteil springt auf Rot.
+Jetzt eine 7-MW-Anlage auf 160 m als reiner Stahlturm. Damit er die Lasten trägt, braucht er unten 6 m Durchmesser – unter Autobahnbrücken passen aber nur etwa 4,30 m. Der Transport wird maßgebend, das Urteil springt auf Rot. Die Eigenfrequenz lässt sich für den breiten Drehzahlbereich dieser Anlage nicht bewerten – die Karte zeigt, warum.
 
 <!-- id: tour.4 -->
 ### Darum der Hybridturm

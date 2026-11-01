@@ -234,5 +234,9 @@
   "landing.tower": "Turm, {h} m",
   "landing.figure": "Ein 160-m-Turm neben dem Kölner Dom",
   "about.title": "Über das Projekt – Wind Design Notebook",
-  "glossary.hint": "Begriff"
+  "glossary.hint": "Begriff",
+  "verdict.notAssessed": "{checks} nicht bewertet – Details in der Karte unten.",
+  "verdict.resonance": "Achtung: f₁ liegt im {band}-Band des Betriebsbereichs – Resonanzgefahr.",
+  "error.input.ringHeight": "Die Ringhöhe muss mindestens 0,5 m betragen.",
+  "map.freqNotAssessed": "Für diese Turbine gibt es kein 1P/3P-Fenster – die Eigenfrequenz geht nicht in die Karte ein."
 }

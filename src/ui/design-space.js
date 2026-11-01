@@ -32,7 +32,8 @@ export async function designSpaceExtension(app) {
     current = s;
     const { svg, legend, table } = feasibilityMapSvg(s, i18n);
     svgBox.innerHTML = svg;
-    /** @type {HTMLElement} */ (root.querySelector('.map-lead')).textContent = i18n.t(`map.lead.${kind}`);
+    /** @type {HTMLElement} */ (root.querySelector('.map-lead')).textContent = i18n.t(`map.lead.${kind}`)
+      + (app.state.result?.bands && !app.state.result.bands.window ? ` ${i18n.t('map.freqNotAssessed')}` : '');
     /** @type {HTMLElement} */ (root.querySelector('.map-legend ul')).innerHTML = legend.map((l) =>
       `<li><span class="swatch" style="background:${l.color};opacity:${l.opacity}"></span>${esc(l.label)}</li>`).join('')
       + `<li><svg width="14" height="14" aria-hidden="true"><circle cx="7" cy="7" r="5" style="fill:none;stroke:var(--ink);stroke-width:2.5"/></svg>${esc(i18n.t('map.current'))}</li>`;

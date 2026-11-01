@@ -60,3 +60,10 @@ test('mass bars and data tables escape text', () => {
   assert.match(t, /<details class="data-table">/);
   assert.ok(t.includes('&lt;2&gt;'));
 });
+
+test('campbell with an inverted rpm range draws no negative widths', () => {
+  const inp = inputsFromPreset(preset('generic-5mw'), 'steel');
+  inp.turbine.rpmMin = 13;
+  const s = campbellSvg(evaluate(inp), i18n);
+  assert.doesNotMatch(s, /width="-/);
+});

@@ -23,7 +23,20 @@ export function verdictSentence(r, i18n) {
   if (!r.governing || !r.f1) return i18n.t('verdict.noResult');
   const first = i18n.t('verdict.sentence', { f1: i18n.num(r.f1.rayleigh_hz, 2), verdict: i18n.t(`verdict.${r.verdict}`) });
   const gov = i18n.t('verdict.governing', { check: checkLabel(r.governing.id, i18n), eta: i18n.num(/** @type {number} */ (r.governing.eta), 2) });
-  return `${first} ${gov}`;
+  return [first, gov, ...assessmentNotes(r, i18n)].join(' ');
+}
+
+/**
+ * Notes for checks that could not be assessed, and a resonance warning.
+ * @param {Result} r
+ * @param {I18n} i18n
+ * @returns {string[]}
+ */
+export function assessmentNotes(r, i18n) {
+  const out = [];
+  if (r.notAssessed.length) out.push(i18n.t('verdict.notAssessed', { checks: r.notAssessed.map((id) => checkLabel(id, i18n)).join(', ') }));
+  if (r.f1?.inBand) out.push(i18n.t('verdict.resonance', { band: r.f1.inBand }));
+  return out;
 }
 
 /**
@@ -37,7 +50,7 @@ export function cardSentence(id, r, i18n) {
     case 'freq': {
       const f1 = i18n.num(r.f1.rayleigh_hz, 3);
       const w = r.bands?.window;
-      if (!w) return i18n.t('card.freq.sentence.empty', { f1 });
+      if (!w) return [i18n.t('card.freq.sentence.empty', { f1 }), ...(r.f1.inBand ? [i18n.t('verdict.resonance', { band: r.f1.inBand })] : [])].join(' ');
       if (r.f1.rayleigh_hz < w[0]) return i18n.t('card.freq.sentence.low', { f1 });
       if (r.f1.rayleigh_hz > w[1]) return i18n.t('card.freq.sentence.high', { f1 });
       return i18n.t('card.freq.sentence.ok', { f1 });

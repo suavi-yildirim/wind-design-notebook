@@ -12,7 +12,8 @@
 export function getPath(obj, path) {
   let cur = obj;
   for (const k of path.split('.')) {
-    if (cur === null || typeof cur !== 'object' || !(k in cur)) return undefined;
+    if (cur === null || typeof cur !== 'object' || !Object.hasOwn(cur, k)) return undefined;
+    if (Array.isArray(cur) && !/^\d+$/.test(k)) return undefined;
     cur = cur[k];
   }
   return cur;

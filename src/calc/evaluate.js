@@ -18,7 +18,7 @@ import { stressCheck, dtPlausibility, makeCheck, pickGoverning, verdict } from '
  * @typedef {{
  *   inputs: Inputs,
  *   tower: { H:number, type:'steel'|'hybrid', stations:Station[] },
- *   f1: { rayleigh_hz:number, hand_hz:number, w:number[], formulaId:string, assumptionIds:string[] } | null,
+ *   f1: { rayleigh_hz:number, hand_hz:number, w:number[], formulaId:string, assumptionIds:string[], inBand:'1P'|'3P'|null } | null,
  *   bands: ReturnType<typeof bands> | null,
  *   loads: (ReturnType<typeof momentLine> & { thrust_N:number, formulaId:string, assumptionIds:string[] }) | null,
  *   stress: ReturnType<typeof stressCheck> | null,
@@ -26,7 +26,8 @@ import { stressCheck, dtPlausibility, makeCheck, pickGoverning, verdict } from '
  *   segments: { steel: ReturnType<typeof balanceSteel>, rings: ReturnType<typeof concreteRings> | null } | null,
  *   crane: ReturnType<typeof heaviestLift> | null,
  *   masses: { steel_kg:number, concrete_kg:number, rna_kg:number, total_kg:number } | null,
- *   checks: Check[], governing: Check|null, verdict: 'green'|'amber'|'red'|'none', errors: CalcError[]
+ *   checks: Check[], governing: Check|null, verdict: 'green'|'amber'|'red'|'none', errors: CalcError[],
+ *   notAssessed: string[]
  * }} Result
  */
 
@@ -86,6 +87,8 @@ export function validateInputs(inputs) {
       if (!(v >= 0 && v < 0.5)) errors.push({ id: 'input', field: 'limits.freqMargin', key: 'error.input.range' });
     } else if (k === 'ringParts') {
       if (!(Number.isInteger(v) && v >= 1)) errors.push({ id: 'input', field: 'limits.ringParts', key: 'error.input.integer' });
+    } else if (k === 'ringHeight_m') {
+      if (!(Number.isFinite(v) && v >= 0.5)) errors.push({ id: 'input', field: 'limits.ringHeight_m', key: 'error.input.ringHeight' });
     } else pos(`limits.${k}`, v);
   }
   for (const [k, v] of Object.entries(inputs.assumptions)) {
@@ -108,7 +111,7 @@ export function evaluate(inputs) {
   const result = {
     inputs, tower: { H: geo.H, type: inputs.type, stations: geo.stations },
     f1: null, bands: null, loads: null, stress: null, dt: null, segments: null, crane: null, masses: null,
-    checks: [], governing: null, verdict: 'none', errors,
+    checks: [], governing: null, verdict: 'none', errors, notAssessed: [],
   };
   // An rpm error only blanks the frequency check; any other error blanks the whole result.
   if (errors.some((e) => e.key !== 'error.turbine.rpm') || geo.stations.length === 0) return result;
@@ -124,7 +127,7 @@ export function evaluate(inputs) {
   result.f1 = {
     rayleigh_hz: ray.f1_hz, w: ray.w,
     hand_hz: handFormula({ H, EI: EImean, kPhi, mRna, mTower: tm.steel_kg + tm.concrete_kg }),
-    formulaId: 'f1.rayleigh', assumptionIds: ASSUMPTIONS_BY_CHECK.freq,
+    formulaId: 'f1.rayleigh', assumptionIds: ASSUMPTIONS_BY_CHECK.freq, inBand: null,
   };
 
   /** @type {number|null} */
@@ -132,6 +135,8 @@ export function evaluate(inputs) {
   if (!errors.length) {
     result.bands = bands(tb.rpmMin, tb.rpmMax, lim.freqMargin);
     etaF = freqEta(ray.f1_hz, result.bands);
+    const inside = (/** @type {[number,number]} */ b) => ray.f1_hz >= b[0] && ray.f1_hz <= b[1];
+    result.f1.inBand = inside(result.bands.p1) ? '1P' : inside(result.bands.p3) ? '3P' : null;
     if (etaF === null) {
       errors.push({ id: 'freq', key: 'error.freq.emptyWindow', params: {
         lo: tb.rpmMax / 60 * (1 + lim.freqMargin), hi: 3 * tb.rpmMin / 60 * (1 - lim.freqMargin) } });
@@ -189,6 +194,9 @@ export function evaluate(inputs) {
   }
   result.checks = checks;
   result.governing = pickGoverning(checks);
+  result.notAssessed = checks.filter((c) => c.eta === null).map((c) => c.id);
   result.verdict = verdict(result.governing ? result.governing.eta : null);
+  // A check that could not be assessed means the concept cannot be called feasible.
+  if (result.notAssessed.length && result.verdict === 'green') result.verdict = 'amber';
   return result;
 }

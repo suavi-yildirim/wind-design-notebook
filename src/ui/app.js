@@ -44,9 +44,15 @@ function createApp(ctx) {
   const base = () => inputsFromPreset(ctx.presets[state.preset], state.type);
   const isPresetUnchanged = () => Object.keys(diffInputs(base(), state.inputs)).length === 0;
 
+  /** @type {ReturnType<typeof setTimeout>|undefined} */
+  let hashTimer;
+  /** Debounced: browsers limit history.replaceState calls (Safari throws above ~100 per 30 s). */
   function writeHash() {
-    const s = { v: /** @type {const} */ (1), preset: state.preset, type: state.type, diff: diffInputs(base(), state.inputs), variants: state.variants };
-    history.replaceState(null, '', `${location.pathname}${location.search}#s=${encodeState(s)}`);
+    clearTimeout(hashTimer);
+    hashTimer = setTimeout(() => {
+      const s = { v: /** @type {const} */ (1), preset: state.preset, type: state.type, diff: diffInputs(base(), state.inputs), variants: state.variants };
+      try { history.replaceState(null, '', `${location.pathname}${location.search}#s=${encodeState(s)}`); } catch { /* rate-limited; next write wins */ }
+    }, 300);
   }
 
   function render() {

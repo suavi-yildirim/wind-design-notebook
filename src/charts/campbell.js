@@ -30,7 +30,9 @@ export function campbellSvg(r, i18n) {
   parts.push(`<text x="${(M.l + W - M.r) / 2}" y="${H - 6}" text-anchor="middle" class="muted">${esc(i18n.t('chart.campbell.x'))}</text>`);
   parts.push(`<text x="12" y="${(M.t + H - M.b) / 2}" text-anchor="middle" class="muted" transform="rotate(-90 12 ${(M.t + H - M.b) / 2})">${esc(i18n.t('chart.campbell.y'))}</text>`);
   const g = [];
-  g.push(`<rect class="operating" x="${r1(x(rpmMin))}" y="${M.t}" width="${r1(x(rpmMax) - x(rpmMin))}" height="${H - M.t - M.b}" style="fill:var(--accent);fill-opacity:0.08"><title>${esc(i18n.t('chart.campbell.operating'))}</title></rect>`);
+  if (rpmMax > rpmMin) {
+    g.push(`<rect class="operating" x="${r1(x(rpmMin))}" y="${M.t}" width="${r1(x(rpmMax) - x(rpmMin))}" height="${H - M.t - M.b}" style="fill:var(--accent);fill-opacity:0.08"><title>${esc(i18n.t('chart.campbell.operating'))}</title></rect>`);
+  }
   const w = r.bands?.window;
   if (w) {
     g.push(`<rect class="window" x="${M.l}" y="${r1(y(w[1]))}" width="${W - M.l - M.r}" height="${r1(y(w[0]) - y(w[1]))}" style="fill:var(--ok);fill-opacity:0.13"><title>${esc(i18n.t('value.window'))}</title></rect>`);

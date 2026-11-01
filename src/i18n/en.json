@@ -234,5 +234,9 @@
   "landing.tower": "Tower, {h} m",
   "landing.figure": "A 160 m tower next to Cologne Cathedral",
   "about.title": "About – Wind Design Notebook",
-  "glossary.hint": "Term"
+  "glossary.hint": "Term",
+  "verdict.notAssessed": "{checks} not assessed – see the card below.",
+  "verdict.resonance": "Caution: f₁ lies inside the {band} band of the operating range – risk of resonance.",
+  "error.input.ringHeight": "The ring height must be at least 0.5 m.",
+  "map.freqNotAssessed": "This turbine has no 1P/3P window – the natural frequency is not part of the map."
 }

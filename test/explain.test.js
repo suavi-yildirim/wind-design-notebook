@@ -44,3 +44,12 @@ test('scale comparisons: cathedral ratio, cars, seconds per turn', () => {
   assert.match(rpm, /5\.0 s/);
   assert.equal(checkLabel('transport.d', i18n('de')), 'Transportdurchmesser');
 });
+
+test('verdict sentence says when a check was not assessed and flags resonance', () => {
+  const r3 = evaluate(inputsFromPreset(preset('generic-3mw'), 'steel'));
+  const de = verdictSentence(r3, i18n('de'));
+  assert.match(de, /Eigenfrequenz nicht bewertet/);
+  assert.match(de, /1P/);
+  assert.match(verdictSentence(r3, i18n('en')), /Natural frequency not assessed/);
+  assert.doesNotMatch(verdictSentence(r5, i18n('de')), /nicht bewertet/);
+});

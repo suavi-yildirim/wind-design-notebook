@@ -135,3 +135,26 @@ test('inputsFromPreset merges default limits with preset overrides', () => {
   i.steel.segments[0].dBot_m = 99;
   assert.notEqual(preset.towers.steel.segments[0].dBot_m, 99, 'preset must not be mutated');
 });
+
+test('empty window: result is incomplete, verdict capped below green, resonance band reported', () => {
+  const inp = uniformSteel();
+  inp.turbine.rpmMin = 3.8;
+  inp.turbine.rpmMax = 11.75;
+  const r = evaluate(inp);
+  assert.deepEqual(r.notAssessed, ['freq']);
+  assert.notEqual(r.verdict, 'green');
+  assert.ok(r.f1);
+  // uniform tower f1 ≈ 0.23 Hz lies inside 3P = 0.19–0.5875 Hz
+  assert.equal(r.f1.inBand, '3P');
+  const ok = evaluate(uniformSteel());
+  assert.deepEqual(ok.notAssessed, []);
+  assert.equal(/** @type {any} */ (ok.f1).inBand, null);
+});
+
+test('ring height below 0.5 m is rejected instead of freezing the sweep', () => {
+  const h = hybridTest();
+  h.limits.ringHeight_m = 0.01;
+  const r = evaluate(h);
+  assert.ok(r.errors.some((e) => e.field === 'limits.ringHeight_m'));
+  assert.equal(r.governing, null);
+});
