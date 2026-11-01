@@ -238,5 +238,9 @@
   "verdict.notAssessed": "{checks} nicht bewertet – Details in der Karte unten.",
   "verdict.resonance": "Achtung: f₁ liegt im {band}-Band des Betriebsbereichs – Resonanzgefahr.",
   "error.input.ringHeight": "Die Ringhöhe muss mindestens 0,5 m betragen.",
-  "map.freqNotAssessed": "Für diese Turbine gibt es kein 1P/3P-Fenster – die Eigenfrequenz geht nicht in die Karte ein."
+  "map.freqNotAssessed": "Für diese Turbine gibt es kein 1P/3P-Fenster – die Eigenfrequenz geht nicht in die Karte ein.",
+  "chart.sketch.front": "Vorderansicht (maßstäblich)",
+  "chart.sketch.side": "Seitenansicht",
+  "chart.sketch.exaggerated": "Breite {k}× überhöht",
+  "inputs.title": "Eingaben"
 }

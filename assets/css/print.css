@@ -7,7 +7,7 @@
 }
 
 body { background: #fff !important; font-size: 10.5pt; color: #000; }
-.site-header, .skip, .controls, #tour-start, .inputs-col, #design-space, #compare, .footer-actions,
+.site-header, .skip, .side-panel, .controls, #tour-start, .inputs-col, #design-space, #compare, .footer-actions,
 .tour-dialog, #notice, .section-lead, .eta-hint, details.data-table, .verdict-intro .lead { display: none !important; }
 
 #print-head { display: block !important; border-bottom: 2px solid #000; margin-bottom: 8mm; }
@@ -15,6 +15,7 @@ body { background: #fff !important; font-size: 10.5pt; color: #000; }
 #print-head p { font-size: 9pt; color: #444; word-break: break-all; }
 
 main { max-width: none; padding: 0; }
+.page-grid { display: block !important; padding: 0 !important; }
 main > section { margin-top: 6mm; }
 .verdict-panel { box-shadow: none; padding: 4mm; break-inside: avoid; grid-template-columns: 1fr 1fr; }
 .verdict-intro h1 { display: none; }

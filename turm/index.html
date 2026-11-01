@@ -24,10 +24,15 @@
     </nav>
   </header>
 
+  <div class="page-grid">
+  <aside id="side-panel" class="side-panel" aria-labelledby="side-title">
+    <h2 id="side-title" class="side-title" data-i18n="inputs.title">Eingaben</h2>
+  </aside>
   <main id="main">
     <p id="notice" class="notice" role="status" hidden></p>
 
     <section id="verdict" class="verdict-panel" aria-labelledby="turm-h1">
+      <div class="verdict-main">
       <div class="verdict-intro">
         <h1 id="turm-h1" data-i18n="turm.h1">Turm</h1>
         <p class="lead" data-i18n="turm.lead"></p>
@@ -44,20 +49,21 @@
           <button id="tour-start" class="btn btn-ghost" type="button" data-i18n="tour.start">Tour starten</button>
         </div>
       </div>
-      <div class="verdict-light" data-verdict="none" aria-live="polite">
-        <span class="lamp" aria-hidden="true"></span>
-        <div>
-          <p class="verdict-title"></p>
-          <p class="verdict-eta"></p>
-          <p class="verdict-check"></p>
+      <p class="verdict-sentence"></p>
+      <p class="eta-hint" data-i18n="verdict.eta"></p>
+      </div>
+      <div class="verdict-side">
+        <div class="verdict-light" data-verdict="none" aria-live="polite">
+          <span class="lamp" aria-hidden="true"></span>
+          <div>
+            <p class="verdict-title"></p>
+            <p class="verdict-eta"></p>
+            <p class="verdict-check"></p>
+          </div>
         </div>
-      </div>
-      <div class="verdict-text">
-        <p class="verdict-sentence"></p>
         <p class="verdict-lever"></p>
-        <p class="eta-hint" data-i18n="verdict.eta"></p>
-        <ul class="scale"></ul>
       </div>
+      <ul class="scale"></ul>
     </section>
 
     <section id="variant" aria-labelledby="h-variant">
@@ -93,6 +99,7 @@
       <div id="limits-body"></div>
     </section>
   </main>
+  </div>
 
   <footer class="site-footer">
     <div class="footer-actions">

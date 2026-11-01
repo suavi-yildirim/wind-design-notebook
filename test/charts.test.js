@@ -67,3 +67,18 @@ test('campbell with an inverted rpm range draws no negative widths', () => {
   const s = campbellSvg(evaluate(inp), i18n);
   assert.doesNotMatch(s, /width="-/);
 });
+
+test('tower sketch has a true-scale front view with three blades and the rotor circle', () => {
+  const s = towerSketchSvg(r5, i18n);
+  assert.equal((s.match(/class="blade"/g) ?? []).length, 3);
+  assert.match(s, /class="rotor-disc"/);
+  assert.match(s, /class="view-front"/);
+  assert.match(s, /class="view-side"/);
+  // the front view is drawn at true scale: rotor circle radius = R · vertical scale
+  const disc = /class="rotor-disc" cx="[\d.]+" cy="[\d.]+" r="([\d.]+)"/.exec(s);
+  const ground = /class="ground" x1="[\d.]+" x2="[\d.]+" y1="([\d.]+)"/.exec(s);
+  const hub = /class="hub" cx="[\d.]+" cy="([\d.]+)"/.exec(s);
+  assert.ok(disc && ground && hub);
+  const sy = (Number(ground[1]) - Number(hub[1])) / 90;
+  assert.ok(Math.abs(Number(disc[1]) / sy - 63) < 1, `R ${Number(disc[1]) / sy}`);
+});
