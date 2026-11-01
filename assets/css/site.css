@@ -120,6 +120,7 @@ main > section { margin-top: 40px; scroll-margin-top: 80px; }
   border: 1px solid var(--accent); background: var(--accent); color: var(--accent-ink); font-weight: 600;
 }
 .btn:hover { filter: brightness(1.08); }
+a.btn { display: inline-block; text-decoration: none; }
 .btn-ghost { background: transparent; color: var(--accent); }
 .btn-small { padding: 4px 10px; font-size: 0.88rem; }
 .btn[disabled] { opacity: 0.5; cursor: not-allowed; }

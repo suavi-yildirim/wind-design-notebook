@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wind Design Notebook</title>
+  <meta name="description" content="Ein öffentliches Notizbuch über die Auslegung von Windenergieanlagen: Rotor → Turm → Straße.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="assets/css/site.css">
+  <script type="module" src="src/ui/static-page.js"></script>
+</head>
+<body data-title-key="landing.title">
+  <a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+  <header class="site-header">
+    <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"></span><span data-i18n="site.title">Wind Design Notebook</span></a>
+    <nav aria-label="Navigation">
+      <a href="./" aria-current="page" data-i18n="nav.home">Start</a>
+      <a href="turm/" data-i18n="nav.turm">Turm</a>
+      <a href="about/" data-i18n="nav.about">Über das Projekt</a>
+      <a id="lang-toggle" class="lang" href="?lang=en">English</a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero">
+      <div>
+        <h1 data-i18n="site.title">Wind Design Notebook</h1>
+        <p class="tagline" data-i18n="site.tagline">Rotor → Turm → Straße</p>
+        <div class="prose" data-block="landing:landing.intro"></div>
+        <p><a class="btn" href="turm/" data-i18n="landing.open">Modul öffnen</a></p>
+      </div>
+      <figure class="hero-figure">
+        <svg class="chart" viewBox="0 -52 320 256" role="img" aria-labelledby="hero-title" xmlns="http://www.w3.org/2000/svg">
+          <title id="hero-title" data-i18n="landing.figure">Ein 160-m-Turm neben dem Kölner Dom</title>
+          <g style="fill:var(--concrete)">
+            <path d="M40 186V70l7-12 8-35 8 35 7 12v116zM98 186V70l7-12 8-35 8 35 7 12v116zM70 186v-62l14-14 14 14v62zM128 186v-56h60v56z"/>
+          </g>
+          <g style="stroke:var(--steel);fill:var(--steel)">
+            <path d="M236 186l2.2-160h1.6l2.2 160z"/>
+            <rect x="234" y="21" width="12" height="6" rx="2"/>
+            <g style="stroke-width:2.2;stroke-linecap:round;fill:none">
+              <line x1="234" y1="24" x2="234" y2="-46"/><line x1="234" y1="24" x2="294.6" y2="59"/><line x1="234" y1="24" x2="173.4" y2="59"/>
+            </g>
+          </g>
+          <line x1="10" x2="310" y1="186" y2="186" style="stroke:var(--ink);stroke-width:1.5"/>
+          <line x1="20" x2="20" y1="186" y2="29" style="stroke:var(--muted)"/>
+          <text x="84" y="198" text-anchor="middle" data-i18n="landing.cathedral">Kölner Dom, 157 m</text>
+          <text x="262" y="198" text-anchor="middle">160 m</text>
+        </svg>
+        <figcaption data-i18n="landing.figure">Ein 160-m-Turm neben dem Kölner Dom</figcaption>
+      </figure>
+    </section>
+    <section class="modules" aria-label="Module">
+      <article class="module-card">
+        <p class="step">01</p>
+        <h2 data-i18n="landing.module.rotor">Rotor</h2>
+        <span class="badge" data-i18n="landing.wip">in Arbeit</span>
+        <p data-i18n="landing.module.rotor.desc"></p>
+      </article>
+      <article class="module-card active">
+        <p class="step">02</p>
+        <h2><a href="turm/" data-i18n="landing.module.turm">Turm</a></h2>
+        <p data-i18n="landing.module.turm.desc"></p>
+        <div data-block="landing:landing.turm"></div>
+      </article>
+      <article class="module-card">
+        <p class="step">03</p>
+        <h2 data-i18n="landing.module.strasse">Straße</h2>
+        <span class="badge" data-i18n="landing.wip">in Arbeit</span>
+        <p data-i18n="landing.module.strasse.desc"></p>
+      </article>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-actions"><a href="https://github.com/suavi-yildirim/wind-design-notebook" data-i18n="footer.github">Quellcode auf GitHub</a></div>
+    <p class="footer-note" data-i18n="footer.note"></p>
+  </footer>
+</body>
+</html>

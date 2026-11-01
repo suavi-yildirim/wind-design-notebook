@@ -5,6 +5,7 @@ import { cardsExtension } from './cards.js';
 import { designSpaceExtension } from './design-space.js';
 import { compareExtension } from './variants.js';
 import { limitsExtension } from './limits.js';
+import { tourExtension } from './tour.js';
 
-extensions.push(cardsExtension, designSpaceExtension, compareExtension, limitsExtension);
+extensions.push(cardsExtension, designSpaceExtension, compareExtension, limitsExtension, tourExtension);
 start();
