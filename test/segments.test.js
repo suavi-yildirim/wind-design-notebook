@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { assertRel } from './helpers.js';
 import { hybridTest } from './fixtures-inputs.js';
 import { buildStations, massBetween } from '../src/calc/tower.js';
-import { splitSteel, concreteRings } from '../src/calc/segments.js';
+import { splitSteel, balanceSteel, concreteRings } from '../src/calc/segments.js';
 
 /**
  * Synthetic steel stations at 1 m spacing with constant D and μ.
@@ -58,4 +58,16 @@ test('rings: hTr 60, h_ring 3.8 → 16 rings, last 3.0 m, part mass = ring mass 
   assertRel(r.partMass_kg[0], massBetween(stations, 0, 3.8, 'concrete') / 2, 1e-12);
   assert.equal(r.maxPartMass_kg, Math.max(...r.partMass_kg));
   assertRel(r.rings.reduce((s, x) => s + x.mass_kg, 0), massBetween(stations, 0, 60, 'concrete'), 1e-9);
+});
+
+test('balanced split keeps the greedy count but evens out lengths (H=95 → 4 × ~24 m)', () => {
+  const s = balanceSteel(synth(95, 1000), { lMax_m: 30, mMax_kg: 80000 });
+  assert.equal(s.length, 4);
+  for (const x of s) assert.ok(x.length_m <= 24 && x.length_m >= 23, `len ${x.length_m}`);
+  assert.equal(s[0].zBot, 0);
+  assert.equal(s[3].zTop, 95);
+});
+
+test('balanced split stays at the limit when the tower is an exact multiple (H=90 → 3 × 30 m)', () => {
+  assert.deepEqual(lengths(balanceSteel(synth(90, 1000), { lMax_m: 30, mMax_kg: 80000 })), [30, 30, 30]);
 });

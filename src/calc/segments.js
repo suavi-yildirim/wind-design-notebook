@@ -44,6 +44,28 @@ export function splitSteel(stations, { lMax_m, mMax_kg }) {
 }
 
 /**
+ * Balanced split: the greedy split fixes the minimum number of segments n; the limits
+ * are then scaled down (bisection) to the smallest factor that still yields n segments.
+ * Without this, greedy segments are always filled to L_max or m_max and η_L, η_m ≈ 1.
+ * @param {Station[]} stations
+ * @param {{ lMax_m:number, mMax_kg:number }} limits
+ * @returns {SteelSegment[]} ordered bottom → top
+ */
+export function balanceSteel(stations, { lMax_m, mMax_kg }) {
+  const greedy = splitSteel(stations, { lMax_m, mMax_kg });
+  const n = greedy.length;
+  let lo = 0;
+  let hi = 1;
+  let best = greedy;
+  for (let k = 0; k < 20; k++) {
+    const s = (lo + hi) / 2;
+    const trial = splitSteel(stations, { lMax_m: s * lMax_m, mMax_kg: s * mMax_kg });
+    if (trial.length <= n) { hi = s; best = trial; } else lo = s;
+  }
+  return best;
+}
+
+/**
  * Concrete rings of height h_ring (last one shorter), each split into n_parts.
  * @param {Station[]} stations
  * @param {{ hTr_m:number, ringHeight_m:number, ringParts:number }} p

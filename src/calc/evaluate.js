@@ -5,7 +5,7 @@ import { buildStations, towerMasses } from './tower.js';
 import { validateFoundation } from './foundation.js';
 import { handFormula, rayleigh, bands, freqEta } from './frequency.js';
 import { thrust, momentLine } from './loads.js';
-import { splitSteel, concreteRings } from './segments.js';
+import { balanceSteel, concreteRings } from './segments.js';
 import { heaviestLift } from './crane.js';
 import { stressCheck, dtPlausibility, makeCheck, pickGoverning, verdict } from './checks.js';
 
@@ -23,7 +23,7 @@ import { stressCheck, dtPlausibility, makeCheck, pickGoverning, verdict } from '
  *   loads: (ReturnType<typeof momentLine> & { thrust_N:number, formulaId:string, assumptionIds:string[] }) | null,
  *   stress: ReturnType<typeof stressCheck> | null,
  *   dt: ReturnType<typeof dtPlausibility> | null,
- *   segments: { steel: ReturnType<typeof splitSteel>, rings: ReturnType<typeof concreteRings> | null } | null,
+ *   segments: { steel: ReturnType<typeof balanceSteel>, rings: ReturnType<typeof concreteRings> | null } | null,
  *   crane: ReturnType<typeof heaviestLift> | null,
  *   masses: { steel_kg:number, concrete_kg:number, rna_kg:number, total_kg:number } | null,
  *   checks: Check[], governing: Check|null, verdict: 'green'|'amber'|'red'|'none', errors: CalcError[]
@@ -151,7 +151,7 @@ export function evaluate(inputs) {
   result.stress = stress;
   result.dt = dtPlausibility(st);
 
-  const steelSegs = splitSteel(st, { lMax_m: lim.lMax_m, mMax_kg: lim.mMax_kg });
+  const steelSegs = balanceSteel(st, { lMax_m: lim.lMax_m, mMax_kg: lim.mMax_kg });
   const rings = inputs.type === 'hybrid'
     ? concreteRings(st, { hTr_m: inputs.hybrid.concrete.hTr_m, ringHeight_m: lim.ringHeight_m, ringParts: lim.ringParts })
     : null;
