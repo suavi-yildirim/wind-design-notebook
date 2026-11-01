@@ -6,6 +6,7 @@ import { designSpaceExtension } from './design-space.js';
 import { compareExtension } from './variants.js';
 import { limitsExtension } from './limits.js';
 import { tourExtension } from './tour.js';
+import { exportExtension } from './export.js';
 
-extensions.push(cardsExtension, designSpaceExtension, compareExtension, limitsExtension, tourExtension);
+extensions.push(cardsExtension, designSpaceExtension, compareExtension, limitsExtension, tourExtension, exportExtension);
 start();

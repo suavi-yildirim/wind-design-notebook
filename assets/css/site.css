@@ -284,6 +284,7 @@ tr.governing td { font-weight: 700; }
 .prose h2 { margin-top: 1.6em; }
 
 body.loading main > section:not(#verdict) { opacity: 0.4; }
+#print-head { display: none; }
 
 /* ---------- responsive ---------- */
 @media (max-width: 767px) {
