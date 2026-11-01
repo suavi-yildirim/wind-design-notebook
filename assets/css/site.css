@@ -190,7 +190,9 @@ main > section { margin-top: 40px; scroll-margin-top: 80px; }
 #reset { margin-top: 12px; }
 
 .results-col { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
-.sketch { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; }
+.results-top { display: grid; grid-template-columns: 230px 1fr; gap: 16px; align-items: start; }
+.sketch { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; }
+.sketch svg { max-height: 460px; }
 .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; }
 .card {
   background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
@@ -287,7 +289,8 @@ body.loading main > section:not(#verdict) { opacity: 0.4; }
   .verdict-panel, .verdict-text, .variant-grid, .map-wrap, .limits-grid, .hero, .modules { grid-template-columns: 1fr; }
   .verdict-panel { padding: 16px; }
   .inputs-col { position: static; max-height: none; overflow: visible; }
-  .cards { grid-template-columns: 1fr; }
+  .cards, .results-top { grid-template-columns: 1fr; }
+  .sketch svg { max-width: 260px; margin: 0 auto; }
   .control select { min-width: 0; width: 100%; }
   .controls > * { flex: 1 1 100%; }
   .segmented span { padding: 7px 10px; }
