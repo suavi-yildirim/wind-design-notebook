@@ -72,4 +72,16 @@ export async function tourExtension(app) {
   }
 
   startBtn.addEventListener('click', () => { step = 0; show(); });
+  // Cards are re-rendered on every update; keep the highlight on the current target.
+  app.addRenderer({
+    update() {
+      if (!dialog) return;
+      const target = document.querySelector(TOUR_STEPS[step].target);
+      if (target && target !== highlighted) {
+        highlighted?.classList.remove('tour-highlight');
+        highlighted = target;
+        highlighted.classList.add('tour-highlight');
+      }
+    },
+  });
 }
