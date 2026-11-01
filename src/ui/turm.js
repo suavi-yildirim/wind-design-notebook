@@ -3,6 +3,8 @@
 import { start, extensions } from './app.js';
 import { cardsExtension } from './cards.js';
 import { designSpaceExtension } from './design-space.js';
+import { compareExtension } from './variants.js';
+import { limitsExtension } from './limits.js';
 
-extensions.push(cardsExtension, designSpaceExtension);
+extensions.push(cardsExtension, designSpaceExtension, compareExtension, limitsExtension);
 start();

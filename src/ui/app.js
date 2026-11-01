@@ -111,6 +111,20 @@ function createApp(ctx) {
     },
     /** @param {Variant[]} v */
     setVariants(v) { state.variants = v; writeHash(); },
+    /**
+     * Load a saved variant: switch preset/type and apply its inputs.
+     * @param {string} preset
+     * @param {'steel'|'hybrid'} type
+     * @param {Inputs} inputs
+     */
+    loadVariant(preset, type, inputs) {
+      state.preset = preset;
+      state.type = type;
+      state.inputs = inputs;
+      syncControls();
+      rebuildInputs();
+      render();
+    },
     render,
     /** @param {string} msg */
     notice(msg) {
