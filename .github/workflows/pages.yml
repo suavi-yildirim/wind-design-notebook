@@ -33,9 +33,8 @@ jobs:
       - name: Node tests
         run: node --test
       - name: Fixture freshness
-        run: |
-          python verify/generate_fixtures.py
-          git diff --exit-code verify/fixtures data/fe-reference.json
+        # Numeric comparison (rel. 1e-4): eigenvalues differ in the last digits between LAPACK builds.
+        run: python verify/generate_fixtures.py --check
 
   deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'

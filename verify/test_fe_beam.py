@@ -57,3 +57,11 @@ def test_mesh_convergence():
 def test_returns_ascending_modes():
     f = natural_frequencies(*uniform(20), k_phi=1e11, m_tip=1e5, n_modes=3)
     assert len(f) == 3 and np.all(np.diff(f) > 0)
+
+
+def test_rigid_base_is_clamped():
+    """An infinite or near-rigid spring must behave as a clamped base, not as an ill-conditioned penalty."""
+    exact = 1.8751**2 / (2 * math.pi) * math.sqrt(EI / (MU * L**4))
+    for k_phi in (math.inf, 1e15, 1e30):
+        f = natural_frequencies(*uniform(50), k_phi=k_phi, m_tip=0.0)[0]
+        assert f == pytest.approx(exact, rel=1e-3), k_phi
