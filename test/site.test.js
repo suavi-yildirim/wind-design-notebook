@@ -5,7 +5,7 @@ import { readFileSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { join, dirname, relative } from 'node:path';
 import { ROOT } from './helpers.js';
 
-const EXCLUDE = new Set(['.git', 'docs', 'verify', 'test', '.github', 'node_modules', '.superpowers', '.claude', '_site']);
+const EXCLUDE = new Set(['.git', 'docs', 'verify', 'test', '.github', 'node_modules', '.superpowers', '.claude', '_site', 'README.md']);
 
 /** @param {string} dir @returns {string[]} */
 function deployable(dir) {

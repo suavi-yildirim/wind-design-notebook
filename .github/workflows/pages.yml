@@ -52,7 +52,7 @@ jobs:
         run: |
           mkdir _site
           rsync -a --exclude '.git' --exclude '.github' --exclude 'docs' --exclude 'verify' --exclude 'test' \
-            --exclude '_site' --exclude 'package.json' --exclude '.gitignore' --exclude '.claude' --exclude '.superpowers' \
+            --exclude '_site' --exclude 'package.json' --exclude 'README.md' --exclude '.gitignore' --exclude '.claude' --exclude '.superpowers' \
             ./ _site/
           touch _site/.nojekyll
       - uses: actions/configure-pages@v5
