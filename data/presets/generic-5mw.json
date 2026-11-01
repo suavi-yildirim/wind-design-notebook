@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "id": "generic-5mw",
+  "name": {
+    "de": "Generisch 5 MW",
+    "en": "Generic 5 MW"
+  },
+  "turbine": {
+    "ratedPower_W": 5000000.0,
+    "rotorDiameter_m": 126,
+    "hubHeight_m": 90,
+    "rpmMin": 6.9,
+    "rpmMax": 12.1,
+    "ratedWind_mps": 11.4,
+    "ctRated": 0.83,
+    "massNacelle_kg": 240000,
+    "massRotor_kg": 110000
+  },
+  "foundation": {
+    "kPhi_Nm_per_rad": 150000000000.0,
+    "label": "author-concept"
+  },
+  "limits": {
+    "craneCapacity_kg": 300000
+  },
+  "towers": {
+    "steel": {
+      "label": "author-concept",
+      "segments": [
+        {
+          "lengthFrac": 0.5,
+          "dBot_m": 4.2,
+          "dTop_m": 4.2,
+          "tBot_m": 0.048,
+          "tTop_m": 0.032
+        },
+        {
+          "lengthFrac": 0.5,
+          "dBot_m": 4.2,
+          "dTop_m": 3.0,
+          "tBot_m": 0.03,
+          "tTop_m": 0.018
+        }
+      ]
+    },
+    "hybrid": {
+      "label": "author-concept",
+      "concrete": {
+        "hTr_m": 30,
+        "dBot_m": 7.0,
+        "dTop_m": 4.6,
+        "t_m": 0.28
+      },
+      "steel": {
+        "segments": [
+          {
+            "lengthFrac": 1,
+            "dBot_m": 4.2,
+            "dTop_m": 3.0,
+            "tBot_m": 0.032,
+            "tTop_m": 0.018
+          }
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "key": "nrel5mw",
+      "title": "Jonkman, Butterfield, Musial, Scott (2009): Definition of a 5-MW Reference Wind Turbine for Offshore System Development. NREL/TP-500-38060",
+      "url": "https://docs.nlr.gov/docs/fy09osti/38060.pdf",
+      "page": "2 (Table 1-1)",
+      "fields": [
+        "ratedPower_W",
+        "rotorDiameter_m",
+        "hubHeight_m",
+        "ratedWind_mps",
+        "rpmMin",
+        "rpmMax",
+        "massRotor_kg",
+        "massNacelle_kg"
+      ]
+    },
+    {
+      "key": "nrel5mw-fig9-1",
+      "title": "Jonkman, Butterfield, Musial, Scott (2009): Definition of a 5-MW Reference Wind Turbine for Offshore System Development. NREL/TP-500-38060",
+      "url": "https://docs.nlr.gov/docs/fy09osti/38060.pdf",
+      "page": "32 (Figure 9-1)",
+      "fields": [
+        "ctRated"
+      ],
+      "derived": "Rotor thrust ≈ 0.82 MN at 11.4 m/s read from the plot; C_T = 2·T/(ρ·A·V²) ≈ 0.83"
+    },
+    {
+      "key": "author",
+      "title": "Author's concept values",
+      "url": "",
+      "page": "–",
+      "fields": [],
+      "derived": "Tower geometry, k_φ and crane capacity are the author's own concept values, not taken from any product."
+    }
+  ]
+}

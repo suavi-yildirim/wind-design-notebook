@@ -1,0 +1,52 @@
+{
+  "Eigenfrequenz": {
+    "en": "natural frequency",
+    "de": "Frequenz, mit der der Turm nach einem Anstoß von selbst schwingt.",
+    "en_def": "Frequency at which the tower swings by itself after a push."
+  },
+  "Nabenhöhe": {
+    "en": "hub height",
+    "de": "Höhe der Rotormitte über dem Boden.",
+    "en_def": "Height of the rotor centre above ground."
+  },
+  "Ausnutzung": {
+    "en": "utilisation",
+    "de": "Anforderung geteilt durch Grenze (η). Unter 1 passt es.",
+    "en_def": "Demand divided by limit (η). Below 1 it fits."
+  },
+  "Hybridturm": {
+    "en": "hybrid tower",
+    "de": "Unten Beton, oben Stahl.",
+    "en_def": "Concrete below, steel above."
+  },
+  "Gondel": {
+    "en": "nacelle",
+    "de": "Maschinenhaus auf dem Turm mit Getriebe und Generator.",
+    "en_def": "Machine housing on top of the tower with gearbox and generator."
+  },
+  "Segment": {
+    "en": "segment",
+    "de": "Transportierbares Turmteil (Rohrschuss).",
+    "en_def": "Transportable tower section (tube section)."
+  },
+  "Drehfeder": {
+    "en": "rotational spring",
+    "de": "Vereinfachtes Fundament: wie stark sich der Turmfuß unter Moment verdreht.",
+    "en_def": "Simplified foundation: how much the tower base rotates under moment."
+  },
+  "Campbell-Diagramm": {
+    "en": "Campbell diagram",
+    "de": "Frequenzen über der Rotordrehzahl – zeigt, wo Resonanz droht.",
+    "en_def": "Frequencies over rotor speed – shows where resonance threatens."
+  },
+  "Schub": {
+    "en": "thrust",
+    "de": "Kraft des Windes auf den Rotor in Windrichtung.",
+    "en_def": "Force of the wind on the rotor in the wind direction."
+  },
+  "1P/3P": {
+    "en": "1P/3P",
+    "de": "Anregung einmal bzw. dreimal pro Rotorumdrehung.",
+    "en_def": "Excitation once or three times per rotor revolution."
+  }
+}

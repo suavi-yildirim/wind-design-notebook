@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "id": "generic-7mw",
+  "name": {
+    "de": "Generisch 7 MW (skaliert)",
+    "en": "Generic 7 MW (scaled)"
+  },
+  "turbine": {
+    "ratedPower_W": 7000000.0,
+    "rotorDiameter_m": 187.4,
+    "hubHeight_m": 160,
+    "rpmMin": 2.64,
+    "rpmMax": 8.15,
+    "ratedWind_mps": 9.8,
+    "ctRated": 0.8,
+    "massNacelle_kg": 478400.0,
+    "massRotor_kg": 192800.0
+  },
+  "foundation": {
+    "kPhi_Nm_per_rad": 200000000000.0,
+    "label": "author-concept"
+  },
+  "limits": {
+    "craneCapacity_kg": 600000
+  },
+  "scaling": {
+    "base": "generic-3mw",
+    "factor_D": 1.4412,
+    "laws": {
+      "D": "D ∝ √P",
+      "rpm": "rpm ∝ 1/D (constant tip speed)",
+      "mass": "m ∝ D^2.5"
+    }
+  },
+  "towers": {
+    "steel": {
+      "label": "author-concept",
+      "segments": [
+        {
+          "lengthFrac": 0.5,
+          "dBot_m": 6.0,
+          "dTop_m": 5.0,
+          "tBot_m": 0.055,
+          "tTop_m": 0.04
+        },
+        {
+          "lengthFrac": 0.5,
+          "dBot_m": 5.0,
+          "dTop_m": 3.8,
+          "tBot_m": 0.038,
+          "tTop_m": 0.022
+        }
+      ]
+    },
+    "hybrid": {
+      "label": "author-concept",
+      "concrete": {
+        "hTr_m": 90,
+        "dBot_m": 10,
+        "dTop_m": 5.0,
+        "t_m": 0.35
+      },
+      "steel": {
+        "segments": [
+          {
+            "lengthFrac": 0.5,
+            "dBot_m": 4.2,
+            "dTop_m": 4.2,
+            "tBot_m": 0.05,
+            "tTop_m": 0.038
+          },
+          {
+            "lengthFrac": 0.5,
+            "dBot_m": 4.2,
+            "dTop_m": 3.8,
+            "tBot_m": 0.038,
+            "tTop_m": 0.022
+          }
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "key": "scaled-3mw",
+      "title": "Bortolotti et al. (2019): IEA Wind TCP Task 37 – Systems Engineering in Wind Energy – WP2.1 Reference Wind Turbines. NREL/TP-5000-73492 – scaled by the author",
+      "url": "https://docs.nlr.gov/docs/fy19osti/73492.pdf",
+      "page": "19, 26, 28, 31",
+      "fields": [
+        "ratedPower_W",
+        "rotorDiameter_m",
+        "rpmMin",
+        "rpmMax",
+        "ratedWind_mps",
+        "massNacelle_kg",
+        "massRotor_kg"
+      ],
+      "derived": "Scaled from the 3.4 MW reference: D ∝ √P (factor 1.4412), rpm ∝ 1/D, masses ∝ D^2.5 (factor 2.494); rated wind kept."
+    },
+    {
+      "key": "author",
+      "title": "Author's concept values",
+      "url": "",
+      "page": "–",
+      "fields": [
+        "hubHeight_m",
+        "ctRated"
+      ],
+      "derived": "Hub height, C_T (as 3.4 MW), tower geometry, k_φ and crane capacity are the author's own concept values."
+    }
+  ]
+}

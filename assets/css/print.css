@@ -1,0 +1,31 @@
+/* Print data sheet (A4): verdict, cards with derivations, utilisation, limitations and sources. */
+@page { size: A4; margin: 14mm 12mm; }
+
+:root {
+  --bg: #fff; --surface: #fff; --surface-2: #fff; --ink: #000; --muted: #444; --line: #bbb;
+  --grid: transparent; --shadow: none;
+}
+
+body { background: #fff !important; font-size: 10.5pt; color: #000; }
+.site-header, .skip, .side-panel, .controls, #tour-start, .inputs-col, #design-space, #compare, .footer-actions,
+.tour-dialog, #notice, .section-lead, .eta-hint, details.data-table, .verdict-intro .lead { display: none !important; }
+
+#print-head { display: block !important; border-bottom: 2px solid #000; margin-bottom: 8mm; }
+#print-head h1 { font-size: 16pt; margin: 0 0 2mm; }
+#print-head p { font-size: 9pt; color: #444; word-break: break-all; }
+
+main { max-width: none; padding: 0; }
+.page-grid { display: block !important; padding: 0 !important; }
+main > section { margin-top: 6mm; }
+.verdict-panel { box-shadow: none; padding: 4mm; break-inside: avoid; grid-template-columns: 1fr 1fr; }
+.verdict-intro h1 { display: none; }
+.variant-grid, .results-top { display: block; }
+.sketch { float: right; width: 45mm; margin: 0 0 4mm 4mm; }
+.cards { display: block; }
+.card { break-inside: avoid; margin-bottom: 5mm; box-shadow: none; }
+.util { break-inside: avoid; }
+.limits-grid { display: block; }
+.limit-list li, .source-list li { break-inside: avoid; }
+a { color: #000; text-decoration: none; }
+.site-footer { background: none; border: 0; padding: 4mm 0 0; }
+svg.chart { max-height: 80mm; }

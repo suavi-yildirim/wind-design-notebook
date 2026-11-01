@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "id": "generic-3mw",
+  "name": {
+    "de": "Generisch 3,4 MW",
+    "en": "Generic 3.4 MW"
+  },
+  "turbine": {
+    "ratedPower_W": 3370000.0,
+    "rotorDiameter_m": 130,
+    "hubHeight_m": 110,
+    "rpmMin": 3.8,
+    "rpmMax": 11.75,
+    "ratedWind_mps": 9.8,
+    "ctRated": 0.8,
+    "massNacelle_kg": 191850,
+    "massRotor_kg": 77298
+  },
+  "foundation": {
+    "kPhi_Nm_per_rad": 100000000000.0,
+    "label": "author-concept"
+  },
+  "limits": {
+    "craneCapacity_kg": 250000
+  },
+  "towers": {
+    "steel": {
+      "label": "author-concept",
+      "segments": [
+        {
+          "lengthFrac": 0.5,
+          "dBot_m": 4.2,
+          "dTop_m": 4.2,
+          "tBot_m": 0.045,
+          "tTop_m": 0.03
+        },
+        {
+          "lengthFrac": 0.5,
+          "dBot_m": 4.2,
+          "dTop_m": 3.2,
+          "tBot_m": 0.028,
+          "tTop_m": 0.018
+        }
+      ]
+    },
+    "hybrid": {
+      "label": "author-concept",
+      "concrete": {
+        "hTr_m": 50,
+        "dBot_m": 7.5,
+        "dTop_m": 4.6,
+        "t_m": 0.3
+      },
+      "steel": {
+        "segments": [
+          {
+            "lengthFrac": 1,
+            "dBot_m": 4.2,
+            "dTop_m": 3.2,
+            "tBot_m": 0.03,
+            "tTop_m": 0.018
+          }
+        ]
+      }
+    }
+  },
+  "sources": [
+    {
+      "key": "iea37-t2",
+      "title": "Bortolotti et al. (2019): IEA Wind TCP Task 37 – Systems Engineering in Wind Energy – WP2.1 Reference Wind Turbines. NREL/TP-5000-73492",
+      "url": "https://docs.nlr.gov/docs/fy19osti/73492.pdf",
+      "page": "19 (Table 2)",
+      "fields": [
+        "ratedPower_W",
+        "rotorDiameter_m",
+        "hubHeight_m"
+      ]
+    },
+    {
+      "key": "iea37-t7",
+      "title": "Bortolotti et al. (2019): IEA Wind TCP Task 37 – Systems Engineering in Wind Energy – WP2.1 Reference Wind Turbines. NREL/TP-5000-73492",
+      "url": "https://docs.nlr.gov/docs/fy19osti/73492.pdf",
+      "page": "31 (Table 7)",
+      "fields": [
+        "ratedWind_mps",
+        "rpmMin",
+        "rpmMax"
+      ],
+      "derived": "rpmMax = rated rotor speed (Omega rated 11.75 rpm)"
+    },
+    {
+      "key": "iea37-t5",
+      "title": "Bortolotti et al. (2019): IEA Wind TCP Task 37 – Systems Engineering in Wind Energy – WP2.1 Reference Wind Turbines. NREL/TP-5000-73492",
+      "url": "https://docs.nlr.gov/docs/fy19osti/73492.pdf",
+      "page": "28 (Table 5)",
+      "fields": [
+        "massNacelle_kg"
+      ],
+      "derived": "Overall nacelle 191.85 t"
+    },
+    {
+      "key": "iea37-rotor",
+      "title": "Bortolotti et al. (2019): IEA Wind TCP Task 37 – Systems Engineering in Wind Energy – WP2.1 Reference Wind Turbines. NREL/TP-5000-73492",
+      "url": "https://docs.nlr.gov/docs/fy19osti/73492.pdf",
+      "page": "19 (Table 2), 26",
+      "fields": [
+        "massRotor_kg"
+      ],
+      "derived": "3 × blade mass 16,441 kg (Table 2) + hub mass 27,975 kg (p. 26) = 77,298 kg"
+    },
+    {
+      "key": "author-ct",
+      "title": "Author's assumption",
+      "url": "",
+      "page": "–",
+      "fields": [
+        "ctRated"
+      ],
+      "derived": "The report gives no rated thrust; C_T = 0.8 is assumed (cf. NREL 5 MW, Fig. 9-1: ≈ 0.83)."
+    },
+    {
+      "key": "author",
+      "title": "Author's concept values",
+      "url": "",
+      "page": "–",
+      "fields": [],
+      "derived": "Tower geometry, k_φ and crane capacity are the author's own concept values, not taken from any product."
+    }
+  ]
+}
