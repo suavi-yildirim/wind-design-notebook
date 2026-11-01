@@ -7,6 +7,7 @@ Run: python verify/generate_fixtures.py
 import copy
 import json
 import math
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -178,25 +179,67 @@ def write_json(path, data):
     path.write_text(json.dumps(data, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8")
 
 
-def main():
+def build_all():
+    """All fixtures and the deployed FE reference, computed in memory."""
     presets = {p.stem: json.loads(p.read_text(encoding="utf-8"))
                for p in sorted((ROOT / "data" / "presets").glob("*.json"))}
-    FIXTURES.mkdir(exist_ok=True)
-    reference = {}
     cases = {}
     for pid, preset in presets.items():
         for tower_type in ("steel", "hybrid"):
             cases[f"{pid}-{tower_type}"] = inputs_from_preset(preset, tower_type)
     preset_cases = set(cases)
     cases.update(extra_cases(presets))
-    for case, inputs in cases.items():
-        fx = fixture(case, inputs)
+    fixtures = {case: fixture(case, inputs) for case, inputs in cases.items()}
+    reference = {"schema": 1, "generator": GENERATOR,
+                 "cases": {c: {"f1_hz": fixtures[c]["expected"]["f1_hz"]} for c in cases if c in preset_cases}}
+    return fixtures, reference
+
+
+def check_fixtures(rel=1e-4):
+    """Compare committed files with a fresh run. Inputs must match exactly, numbers within `rel`
+    (eigenvalues differ in the last digits between LAPACK builds). Returns a list of problems."""
+    fixtures, reference = build_all()
+    problems = []
+    committed = {p.stem for p in FIXTURES.glob("*.json")}
+    for name in sorted(committed ^ set(fixtures)):
+        problems.append(f"{name}: fixture file missing or not generated")
+
+    def close(a, b):
+        return a == b or abs(a - b) <= rel * max(abs(a), abs(b))
+
+    for case, fx in fixtures.items():
+        path = FIXTURES / f"{case}.json"
+        if not path.exists():
+            continue
+        old = json.loads(path.read_text(encoding="utf-8"))
+        for key in ("schema", "case", "generator", "inputs", "tolerance"):
+            if old.get(key) != fx[key]:
+                problems.append(f"{case}: '{key}' differs")
+        for key, value in fx["expected"].items():
+            if key not in old.get("expected", {}) or not close(old["expected"][key], value):
+                problems.append(f"{case}: expected.{key} {old.get('expected', {}).get(key)} != {value}")
+    ref_old = json.loads((ROOT / "data" / "fe-reference.json").read_text(encoding="utf-8"))
+    if set(ref_old.get("cases", {})) != set(reference["cases"]) or any(
+            not close(ref_old["cases"][c]["f1_hz"], v["f1_hz"]) for c, v in reference["cases"].items()):
+        problems.append("data/fe-reference.json differs")
+    return problems
+
+
+def main(argv):
+    if "--check" in argv:
+        problems = check_fixtures()
+        for p in problems:
+            print(p)
+        print("fixtures: fresh" if not problems else f"fixtures: {len(problems)} problem(s) - run python verify/generate_fixtures.py")
+        return 1 if problems else 0
+    fixtures, reference = build_all()
+    FIXTURES.mkdir(exist_ok=True)
+    for case, fx in fixtures.items():
         write_json(FIXTURES / f"{case}.json", fx)
-        if case in preset_cases:
-            reference[case] = {"f1_hz": fx["expected"]["f1_hz"]}
         print(f"{case:30s} f1={fx['expected']['f1_hz']:.4f} Hz")
-    write_json(ROOT / "data" / "fe-reference.json", {"schema": 1, "generator": GENERATOR, "cases": reference})
+    write_json(ROOT / "data" / "fe-reference.json", reference)
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main(sys.argv[1:]))

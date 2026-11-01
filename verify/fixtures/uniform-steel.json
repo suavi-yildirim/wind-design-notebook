@@ -2,7 +2,7 @@
   "case": "uniform-steel",
   "expected": {
     "base_moment_Nm": 162672000.0,
-    "f1_hz": 0.228036,
+    "f1_hz": 0.229166,
     "mass_concrete_kg": 0.0,
     "mass_steel_kg": 212010.0
   },
