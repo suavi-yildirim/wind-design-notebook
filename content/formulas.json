@@ -1,0 +1,18 @@
+{
+  "section.A": "A = \\tfrac{\\pi}{4}\\left(D^2 - (D-2t)^2\\right)",
+  "section.I": "I = \\tfrac{\\pi}{64}\\left(D^4 - (D-2t)^4\\right)",
+  "section.W": "W = \\tfrac{2I}{D}",
+  "f1.hand": "\\frac{1}{k} = \\frac{H^3}{3EI} + \\frac{H^2}{k_\\varphi},\\quad f_1 = \\frac{1}{2\\pi}\\sqrt{\\frac{k}{M_\\mathrm{RNA} + 0.24\\,m_\\mathrm{Turm}}}",
+  "f1.rayleigh": "\\omega^2 = \\frac{\\int_0^H EI\\,w''^2\\,dz + k_\\varphi\\,w'(0)^2}{\\int_0^H \\mu\\,w^2\\,dz + M_\\mathrm{RNA}\\,w(H)^2},\\quad f_1 = \\frac{\\omega}{2\\pi}",
+  "bands.window": "f_{1P} = \\frac{n}{60},\\quad f_{3P} = 3\\,f_{1P},\\quad f_{1P,\\max}(1+m) \\le f_1 \\le f_{3P,\\min}(1-m)",
+  "check.freq": "\\eta_f = \\max\\!\\left(\\frac{f_{1P,\\max}(1+m)}{f_1},\\ \\frac{f_1}{f_{3P,\\min}(1-m)}\\right)",
+  "load.thrust": "F_T = \\tfrac12\\,\\rho_\\mathrm{air}\\,A_\\mathrm{Rotor}\\,C_T\\,V_\\mathrm{rated}^2",
+  "load.drag": "q(z) = \\tfrac12\\,\\rho_\\mathrm{air}\\,v(z)^2\\,c_f\\,D(z),\\quad v(z) = V_\\mathrm{rated}\\left(\\tfrac{z}{H}\\right)^{\\alpha}",
+  "load.moment": "M_d(z) = \\gamma_F\\,k_\\mathrm{peak}\\left[F_T\\,(H-z) + \\int_z^H q(\\zeta)\\,(\\zeta - z)\\,d\\zeta\\right]",
+  "load.normal": "N(z) = \\gamma_G\\,g\\left(M_\\mathrm{RNA} + m_\\mathrm{Turm}(>z)\\right)",
+  "check.stress": "\\sigma = \\frac{N}{A} + \\frac{M_d}{W},\\qquad \\eta_\\sigma = \\frac{\\sigma}{f_y(t)/\\gamma_{M1}}",
+  "check.transport": "\\eta_D = \\frac{D_\\mathrm{Segment,max}}{D_\\mathrm{Transport}},\\quad \\eta_L = \\frac{L_\\mathrm{Segment}}{L_\\max},\\quad \\eta_m = \\frac{m_\\mathrm{Segment}}{m_\\max}",
+  "check.concrete": "\\eta_{m,c} = \\frac{m_\\mathrm{Ring}/n_\\mathrm{Teile}}{m_\\max}",
+  "check.crane": "\\eta_\\mathrm{Kran} = \\frac{\\max(m_\\mathrm{Segment},\\,m_\\mathrm{Betonteil},\\,m_\\mathrm{Gondel},\\,m_\\mathrm{Rotor})}{\\mathrm{Traglast}(H + 10\\,\\mathrm{m})}",
+  "scaling.7mw": "D \\propto \\sqrt{P},\\quad n \\propto \\tfrac{1}{D},\\quad m \\propto D^{2.5}"
+}
