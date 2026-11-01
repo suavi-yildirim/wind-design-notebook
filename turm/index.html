@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Turm – Wind Design Notebook</title>
+  <meta name="description" content="Stahl- und Hybridturm für Windenergieanlagen: Eigenfrequenz, Spannung, Transport und Kran als Ausnutzung η – mit Formeln, Annahmen und Quellen.">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="../assets/css/site.css">
+  <link rel="stylesheet" href="../assets/css/print.css" media="print">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" crossorigin="anonymous">
+  <script type="module" src="../src/ui/turm.js"></script>
+</head>
+<body class="loading">
+  <a class="skip" href="#main" data-i18n="nav.skip">Zum Inhalt springen</a>
+  <header class="site-header">
+    <a class="brand" href="../"><span class="brand-mark" aria-hidden="true"></span><span data-i18n="site.title">Wind Design Notebook</span></a>
+    <nav aria-label="Navigation">
+      <a href="../" data-i18n="nav.home">Start</a>
+      <a href="./" aria-current="page" data-i18n="nav.turm">Turm</a>
+      <a href="../about/" data-i18n="nav.about">Über das Projekt</a>
+      <a id="lang-toggle" class="lang" href="?lang=en">English</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <p id="notice" class="notice" role="status" hidden></p>
+
+    <section id="verdict" class="verdict-panel" aria-labelledby="turm-h1">
+      <div class="verdict-intro">
+        <h1 id="turm-h1" data-i18n="turm.h1">Turm</h1>
+        <p class="lead" data-i18n="turm.lead"></p>
+        <div class="controls">
+          <label class="control"><span data-i18n="header.preset">Turbine</span>
+            <select id="preset"></select></label>
+          <fieldset class="control segmented">
+            <legend data-i18n="header.type">Turmtyp</legend>
+            <div class="seg-buttons">
+              <label><input type="radio" name="type" value="steel" checked><span data-i18n="type.steel">Stahlrohrturm</span></label>
+              <label><input type="radio" name="type" value="hybrid"><span data-i18n="type.hybrid">Hybridturm</span></label>
+            </div>
+          </fieldset>
+          <button id="tour-start" class="btn btn-ghost" type="button" data-i18n="tour.start">Tour starten</button>
+        </div>
+      </div>
+      <div class="verdict-light" data-verdict="none" aria-live="polite">
+        <span class="lamp" aria-hidden="true"></span>
+        <div>
+          <p class="verdict-title"></p>
+          <p class="verdict-eta"></p>
+          <p class="verdict-check"></p>
+        </div>
+      </div>
+      <div class="verdict-text">
+        <p class="verdict-sentence"></p>
+        <p class="verdict-lever"></p>
+        <p class="eta-hint" data-i18n="verdict.eta"></p>
+        <ul class="scale"></ul>
+      </div>
+    </section>
+
+    <section id="variant" aria-labelledby="h-variant">
+      <h2 id="h-variant" data-i18n="section.variant">① Variante</h2>
+      <p class="section-lead" data-i18n="section.variant.lead"></p>
+      <div class="variant-grid">
+        <aside class="inputs-col">
+          <form id="inputs" class="inputs" novalidate></form>
+          <button id="reset" class="btn btn-ghost" type="button" data-i18n="inputs.reset">Auf Vorlage zurücksetzen</button>
+        </aside>
+        <div class="results-col">
+          <div id="sketch" class="sketch"></div>
+          <div id="cards" class="cards"></div>
+          <div id="util" class="util"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="design-space" aria-labelledby="h-ds">
+      <h2 id="h-ds" data-i18n="section.designSpace">② Entwurfsraum</h2>
+      <div id="map"></div>
+    </section>
+
+    <section id="compare" aria-labelledby="h-compare">
+      <h2 id="h-compare" data-i18n="section.compare">③ Vergleich</h2>
+      <div id="compare-body"></div>
+    </section>
+
+    <section id="limits" aria-labelledby="h-limits">
+      <h2 id="h-limits" data-i18n="section.limits">④ Grenzen &amp; Quellen</h2>
+      <div id="limits-body"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-actions">
+      <button id="print" class="btn" type="button" data-i18n="footer.print">Datenblatt drucken / PDF</button>
+      <button id="csv" class="btn" type="button" data-i18n="footer.csv">Ausnutzung als CSV</button>
+      <a href="https://github.com/suavi-yildirim/wind-design-notebook" data-i18n="footer.github">Quellcode auf GitHub</a>
+    </div>
+    <p class="footer-note" data-i18n="footer.note"></p>
+  </footer>
+</body>
+</html>

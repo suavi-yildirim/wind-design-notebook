@@ -4,3 +4,4 @@ __pycache__/
 verify/.venv/
 .superpowers/
 _site/
+.claude/
