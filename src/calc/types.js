@@ -17,7 +17,7 @@
  *                 gammaG:number, gammaM1:number, g:number, hookAllowance_m:number }
  * }} Inputs
  * @typedef {{ z:number, D:number, t:number, A:number, I:number, W:number, EI:number, mu:number,
- *             material:'steel'|'concrete' }} Station
+ *             material:'steel'|'concrete', zone?:number }} Station
  * @typedef {{ id:string, eta:number|null, limit:number, demand:number, unit:string, formulaId:string,
  *             assumptionIds:string[], governingInput:string, z_m?:number }} Check
  * @typedef {{ id:string, field?:string, key:string, params?:Record<string,number|string> }} CalcError

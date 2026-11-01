@@ -14,13 +14,14 @@ import { STEEL, CONCRETE, N_INTERVALS } from './defaults.js';
  * @param {number} t
  * @param {'steel'|'concrete'} material
  * @param {number} kAdd
+ * @param {number} [zone] steel zone index
  * @returns {Station}
  */
-function station(z, D, t, material, kAdd) {
+function station(z, D, t, material, kAdd, zone) {
   const { A, I, W } = circularHollow(D, t);
   const mat = material === 'steel' ? STEEL : CONCRETE;
   const mu = mat.rho * A * (material === 'steel' ? kAdd : 1);
-  return { z, D, t, A, I, W, EI: mat.E * I, mu, material };
+  return { z, D, t, A, I, W, EI: mat.E * I, mu, material, ...(zone === undefined ? {} : { zone }) };
 }
 
 /**
@@ -62,7 +63,7 @@ function zoneAt(zones, s) {
     if (s < end || i === zones.length - 1) {
       const u = Math.min(1, Math.max(0, (s - start) / zones[i].lengthFrac));
       const z = zones[i];
-      return { D: z.dBot_m + (z.dTop_m - z.dBot_m) * u, t: z.tBot_m + (z.tTop_m - z.tBot_m) * u };
+      return { D: z.dBot_m + (z.dTop_m - z.dBot_m) * u, t: z.tBot_m + (z.tTop_m - z.tBot_m) * u, zone: i };
     }
     start = end;
   }
@@ -93,8 +94,8 @@ export function buildStations(inputs) {
     const stations = [];
     for (let i = 0; i <= N_INTERVALS; i++) {
       const z = (i / N_INTERVALS) * H;
-      const { D, t } = zoneAt(zones, i / N_INTERVALS);
-      stations.push(station(z, D, t, 'steel', kAdd));
+      const { D, t, zone } = zoneAt(zones, i / N_INTERVALS);
+      stations.push(station(z, D, t, 'steel', kAdd, zone));
     }
     return { H, stations, errors };
   }
@@ -121,8 +122,8 @@ export function buildStations(inputs) {
   const zones = inputs.hybrid.steel.segments;
   for (let k = 0; k <= ns; k++) {
     const u = k / ns;
-    const { D, t } = zoneAt(zones, u);
-    stations.push(station(c.hTr_m + u * (H - c.hTr_m), D, t, 'steel', kAdd));
+    const { D, t, zone } = zoneAt(zones, u);
+    stations.push(station(c.hTr_m + u * (H - c.hTr_m), D, t, 'steel', kAdd, zone));
   }
   return { H, stations, errors };
 }
