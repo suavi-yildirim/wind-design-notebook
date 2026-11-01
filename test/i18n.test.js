@@ -82,3 +82,11 @@ test('parseBlocks splits markdown on id markers', () => {
   assert.equal(m.get('a.one')?.trim(), 'Hello');
   assert.equal(m.get('a.two')?.trim(), 'World');
 });
+
+test('formulas brace every command used as a sub- or superscript (KaTeX rejects D_\\mathrm{…})', () => {
+  const formulas = JSON.parse(read('content/formulas.json'));
+  for (const [id, tex] of Object.entries(formulas)) {
+    const bad = /** @type {string} */ (tex).match(/[_^]\\[a-zA-Z]+/g);
+    assert.equal(bad, null, `${id}: ${bad}`);
+  }
+});

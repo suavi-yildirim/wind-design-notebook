@@ -219,6 +219,8 @@ a.btn { display: inline-block; text-decoration: none; }
 .derivation h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.04em; color: var(--muted); margin: 10px 0 4px; }
 .derivation ul { margin: 0; padding-left: 1.2em; font-size: 0.9rem; }
 .derivation .formula { overflow-x: auto; padding: 6px 0; font-size: 0.95rem; }
+.derivation .formula .katex-display { margin: 0.4em 0; }
+.derivation .formula .katex-display > .katex { font-size: 1em; }
 .derivation .fe { font-size: 0.9rem; background: var(--surface-2); border-radius: 6px; padding: 6px 8px; }
 
 /* ---------- charts ---------- */
