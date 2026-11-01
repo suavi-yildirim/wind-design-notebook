@@ -1,0 +1,24 @@
+{
+  "cases": {
+    "generic-3mw-hybrid": {
+      "f1_hz": 0.270961
+    },
+    "generic-3mw-steel": {
+      "f1_hz": 0.187364
+    },
+    "generic-5mw-hybrid": {
+      "f1_hz": 0.278055
+    },
+    "generic-5mw-steel": {
+      "f1_hz": 0.235635
+    },
+    "generic-7mw-hybrid": {
+      "f1_hz": 0.1628
+    },
+    "generic-7mw-steel": {
+      "f1_hz": 0.113736
+    }
+  },
+  "generator": "python-fe 1.0",
+  "schema": 1
+}

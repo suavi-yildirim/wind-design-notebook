@@ -1,0 +1,93 @@
+{
+  "case": "generic-5mw-steel",
+  "expected": {
+    "base_moment_Nm": 151524000.0,
+    "f1_hz": 0.235635,
+    "mass_concrete_kg": 0.0,
+    "mass_steel_kg": 303701.0
+  },
+  "generator": "python-fe 1.0",
+  "inputs": {
+    "assumptions": {
+      "alpha": 0.2,
+      "cf": 0.7,
+      "g": 9.81,
+      "gammaF": 1.35,
+      "gammaG": 1.35,
+      "gammaM1": 1.1,
+      "hookAllowance_m": 10,
+      "kAdd": 1.08,
+      "kPeak": 1.5,
+      "rhoAir": 1.225
+    },
+    "foundation": {
+      "kPhi_Nm_per_rad": 150000000000.0
+    },
+    "hybrid": {
+      "concrete": {
+        "dBot_m": 7.0,
+        "dTop_m": 4.6,
+        "hTr_m": 30,
+        "t_m": 0.28
+      },
+      "steel": {
+        "segments": [
+          {
+            "dBot_m": 4.2,
+            "dTop_m": 3.0,
+            "lengthFrac": 1,
+            "tBot_m": 0.032,
+            "tTop_m": 0.018
+          }
+        ]
+      }
+    },
+    "limits": {
+      "craneCapacity_kg": 300000,
+      "dTransport_m": 4.3,
+      "freqMargin": 0.1,
+      "lMax_m": 30,
+      "mMax_kg": 80000,
+      "ringHeight_m": 3.8,
+      "ringParts": 2
+    },
+    "presetId": "generic-5mw",
+    "steel": {
+      "segments": [
+        {
+          "dBot_m": 4.2,
+          "dTop_m": 4.2,
+          "lengthFrac": 0.5,
+          "tBot_m": 0.048,
+          "tTop_m": 0.032
+        },
+        {
+          "dBot_m": 4.2,
+          "dTop_m": 3.0,
+          "lengthFrac": 0.5,
+          "tBot_m": 0.03,
+          "tTop_m": 0.018
+        }
+      ]
+    },
+    "turbine": {
+      "ctRated": 0.83,
+      "hubHeight_m": 90,
+      "massNacelle_kg": 240000,
+      "massRotor_kg": 110000,
+      "ratedPower_W": 5000000.0,
+      "ratedWind_mps": 11.4,
+      "rotorDiameter_m": 126,
+      "rpmMax": 12.1,
+      "rpmMin": 6.9
+    },
+    "type": "steel"
+  },
+  "schema": 1,
+  "tolerance": {
+    "base_moment_Nm": 0.005,
+    "f1_hz": 0.03,
+    "mass_concrete_kg": 0.005,
+    "mass_steel_kg": 0.005
+  }
+}
